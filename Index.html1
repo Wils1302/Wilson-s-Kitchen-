@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Wilson's Kitchen - Delicious food in Port Harcourt.">
+<title>Wilson's Kitchen | Good Food, Good Mood</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+--orange:#f26a21;
+--dark:#241b17;
+--cream:#fff8f0;
+--white:#fffdf9;
+--gray:#786e68;
+}
+
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+
+body{
+font-family:'DM Sans',sans-serif;
+background:var(--white);
+color:var(--dark);
+}
+
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+
+.container{
+width:90%;
+max-width:1150px;
+margin:auto;
+}
+
+.announcement{
+background:var(--dark);
+color:white;
+text-align:center;
+padding:10px;
+font-size:11px;
+letter-spacing:2px;
+}
+
+header{
+height:80px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 5%;
+background:var(--white);
+position:sticky;
+top:0;
+z-index:100;
+border-bottom:1px solid #eee;
+}
+
+.logo{
+font:800 25px 'Playfair Display',serif;
+}
+
+.logo span{color:var(--orange)}
+
+nav{
+display:flex;
+align-items:center;
+gap:30px;
+}
+
+nav a{
+font-size:13px;
+font-weight:600;
+}
+
+nav a:hover{color:var(--orange)}
+
+.cart-button{
+background:var(--dark);
+color:white;
+border:none;
+padding:12px 18px;
+cursor:pointer;
+border-radius:3px;
+}
+
+.cart-button span{
+background:var(--orange);
+padding:4px 7px;
+border-radius:50%;
+margin-left:5px;
+}
+
+.menu-toggle{
+display:none;
+background:none;
+border:none;
+font-size:26px;
+cursor:pointer;
+}
+
+/* HERO */
+
+.hero{
+min-height:620px;
+background:
+linear-gradient(90deg,rgba(20,12,8,.88),rgba(20,12,8,.25)),
+url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1800&q=85') center/cover;
+display:flex;
+align-items:center;
+color:white;
+}
+
+.hero-content{
+width:90%;
+max-width:1150px;
+margin:auto;
+padding:80px 0;
+}
+
+.eyebrow{
+color:var(--orange);
+font-size:11px;
+font-weight:bold;
+letter-spacing:3px;
+margin-bottom:20px;
+}
+
+.hero h1{
+font:800 clamp(50px,7vw,85px)/1.05 'Playfair Display',serif;
+}
+
+.hero h1 em{
+color:var(--orange);
+}
+
+.hero p{
+max-width:440px;
+line-height:1.9;
+font-size:14px;
+margin:25px 0;
+color:#eee;
+}
+
+.btn{
+display:inline-block;
+padding:16px 24px;
+background:var(--orange);
+color:white;
+border:none;
+border-radius:3px;
+font-size:12px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+background:#d95112;
+transform:translateY(-3px);
+}
+
+/* BENEFITS */
+
+.benefits{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+padding:35px 0;
+text-align:center;
+border-bottom:1px solid #eee;
+}
+
+.benefits h4{font-size:13px}
+.benefits p{font-size:11px;color:var(--gray);margin-top:7px}
+
+/* MENU */
+
+.menu-section{
+padding:100px 0;
+background:#fffaf5;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:45px;
+}
+
+.section-title h2{
+font:700 48px 'Playfair Display',serif;
+}
+
+.section-title h2 em{color:var(--orange)}
+
+.section-title p{
+color:var(--gray);
+font-size:13px;
+margin-top:12px;
+}
+
+.filters{
+display:flex;
+justify-content:center;
+gap:10px;
+flex-wrap:wrap;
+margin-bottom:35px;
+}
+
+.filter{
+padding:10px 17px;
+border:1px solid #ddd;
+background:transparent;
+border-radius:30px;
+cursor:pointer;
+font-size:11px;
+}
+
+.filter.active,.filter:hover{
+background:var(--dark);
+color:white;
+border-color:var(--dark);
+}
+
+.food-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:22px;
+}
+
+.food-card{
+background:white;
+border:1px solid #eee;
+overflow:hidden;
+transition:.3s;
+}
+
+.food-card:hover{
+transform:translateY(-6px);
+box-shadow:0 12px 30px #00000012;
+}
+
+.food-card img{
+width:100%;
+height:190px;
+object-fit:cover;
+display:block;
+}
+
+.food-info{padding:17px}
+
+.food-info h3{
+font:700 18px 'Playfair Display',serif;
+margin-bottom:8px;
+}
+
+.food-info p{
+font-size:11px;
+color:var(--gray);
+line-height:1.6;
+min-height:35px;
+}
+
+.food-bottom{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:15px;
+}
+
+.price{
+font-weight:bold;
+font-size:14px;
+}
+
+.add{
+width:33px;
+height:33px;
+background:var(--orange);
+color:white;
+border:none;
+border-radius:50%;
+font-size:20px;
+cursor:pointer;
+}
+
+.add:hover{background:var(--dark)}
+
+/* FEATURE */
+
+.feature{
+display:grid;
+grid-template-columns:1fr 1fr;
+background:var(--dark);
+color:white;
+}
+
+.feature img{
+width:100%;
+height:420px;
+object-fit:cover;
+}
+
+.feature-text{
+padding:60px;
+align-self:center;
+}
+
+.feature-text h2{
+font:700 45px 'Playfair Display',serif;
+}
+
+.feature-text h2 em{color:var(--orange)}
+
+.feature-text p{
+color:#ccc;
+line-height:1.9;
+font-size:13px;
+margin:20px 0;
+}
+
+/* ABOUT */
+
+.about{
+padding:100px 0;
+}
+
+.about-content{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:65px;
+align-items:center;
+}
+
+.about img{
+width:100%;
+height:430px;
+object-fit:cover;
+}
+
+.about h2{
+font:700 48px 'Playfair Display',serif;
+margin-bottom:20px;
+}
+
+.about h2 em{color:var(--orange)}
+
+.about p{
+font-size:13px;
+color:var(--gray);
+line-height:2;
+margin-bottom:15px;
+}
+
+/* CTA */
+
+.cta{
+background:var(--orange);
+color:white;
+padding:65px 5%;
+text-align:center;
+}
+
+.cta h2{
+font:700 43px 'Playfair Display',serif;
+margin-bottom:20px;
+}
+
+.cta .btn{
+background:white;
+color:var(--dark);
+}
+
+/* CONTACT */
+
+.contact{
+padding:90px 0;
+background:var(--cream);
+text-align:center;
+}
+
+.contact h2{
+font:700 45px 'Playfair Display',serif;
+margin-bottom:20px;
+}
+
+.contact p{
+color:var(--gray);
+font-size:13px;
+line-height:1.8;
+}
+
+.contact-details{
+margin-top:25px;
+line-height:2.5;
+font-size:13px;
+}
+
+/* FOOTER */
+
+footer{
+background:var(--dark);
+color:white;
+padding:35px 5%;
+text-align:center;
+font-size:11px;
+}
+
+footer p{margin-top:10px;color:#bbb}
+
+/* CART */
+
+.cart-panel{
+position:fixed;
+top:0;
+right:-450px;
+width:min(420px,100%);
+height:100vh;
+background:white;
+z-index:300;
+padding:25px;
+transition:.3s;
+display:flex;
+flex-direction:column;
+}
+
+.cart-panel.open{right:0}
+
+.cart-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding-bottom:20px;
+border-bottom:1px solid #eee;
+}
+
+.cart-header h2{
+font:700 26px 'Playfair Display',serif;
+}
+
+.close{
+border:none;
+background:#eee;
+border-radius:50%;
+width:35px;
+height:35px;
+font-size:22px;
+cursor:pointer;
+}
+
+.cart-items{
+flex:1;
+overflow:auto;
+padding:15px 0;
+}
+
+.cart-item{
+padding:15px 0;
+border-bottom:1px solid #eee;
+display:flex;
+justify-content:space-between;
+gap:10px;
+}
+
+.cart-item h4{font-size:13px}
+.cart-item p{font-size:12px;color:var(--gray);margin-top:6px}
+
+.qty{
+display:flex;
+align-items:center;
+gap:10px;
+margin-top:8px;
+}
+
+.qty button{
+width:25px;
+height:25px;
+border:1px solid #ddd;
+background:white;
+cursor:pointer;
+}
+
+.cart-total{
+border-top:1px solid #ddd;
+padding-top:20px;
+}
+
+.cart-total h3{
+display:flex;
+justify-content:space-between;
+margin-bottom:15px;
+}
+
+.cart-total button{width:100%}
+
+.overlay{
+position:fixed;
+inset:0;
+background:#0009;
+z-index:250;
+display:none;
+}
+
+.overlay.show{display:block}
+
+.empty{
+text-align:center;
+padding:60px 10px;
+color:var(--gray);
+font-size:13px;
+}
+
+@media(max-width:850px){
+.food-grid{grid-template-columns:repeat(2,1fr)}
+.feature-text{padding:35px}
+.about-content{gap:30px}
+}
+
+@media(max-width:600px){
+header{height:70px}
+.menu-toggle{display:block}
+nav{
+display:none;
+position:absolute;
+top:70px;
+left:0;
+width:100%;
+background:white;
+padding:20px;
+flex-direction:column;
+align-items:stretch;
+gap:0;
+box-shadow:0 10px 15px #0001;
+}
+nav.open{display:flex}
+nav a{padding:14px 0;border-bottom:1px solid #eee}
+.cart-button{margin-top:12px}
+.hero{min-height:550px}
+.hero h1{font-size:54px}
+.benefits{grid-template-columns:1fr;gap:20px}
+.menu-section,.about{padding:70px 0}
+.section-title h2{font-size:38px}
+.food-grid{gap:12px}
+.food-card img{height:140px}
+.food-info{padding:12px}
+.food-info h3{font-size:15px}
+.food-info p{font-size:10px}
+.price{font-size:12px}
+.feature{grid-template-columns:1fr}
+.feature img{height:260px}
+.feature-text{padding:40px 25px}
+.feature-text h2{font-size:38px}
+.about-content{grid-template-columns:1fr}
+.about img{height:300px}
+.about h2,.contact h2{font-size:39px}
+.cta h2{font-size:34px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="announcement">
+FRESH FOOD • PORT HARCOURT • DELIVERY & PICKUP
+</div>
+
+<header>
+<a href="#home" class="logo">Wilson's <span>Kitchen.</span></a>
+
+<button class="menu-toggle" id="menuToggle">☰</button>
+
+<nav id="nav">
+<a href="#home">Home</a>
+<a href="#menu">Our Menu</a>
+<a href="#about">About Us</a>
+<a href="#contact">Contact</a>
+<button class="cart-button" onclick="openCart()">Cart <span id="cartCount">0</span></button>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<div class="hero-content">
+<div class="eyebrow">MADE FRESH. SERVED WITH LOVE.</div>
+<h1>Big flavour.<br><em>Good feeling.</em></h1>
+<p>Your cravings called. Enjoy delicious Nigerian favourites, freshly prepared with flavour in every bite.</p>
+<a href="#menu" class="btn">EXPLORE OUR MENU ↗</a>
+</div>
+</section>
+
+<section class="benefits container">
+<div><h4>♨ Freshly Prepared</h4><p>Food made with care</p></div>
+<div><h4>⌂ Delivery & Pickup</h4><p>Enjoy it your way</p></div>
+<div><h4>♡ Made With Love</h4><p>Flavour in every bite</p></div>
+</section>
+
+<section class="menu-section" id="menu">
+<div class="container">
+<div class="section-title">
+<div class="eyebrow">A LITTLE SOMETHING FOR EVERY CRAVING</div>
+<h2>Explore the <em>menu.</em></h2>
+<p>Discover your next favourite meal.</p>
+</div>
+
+<div class="filters" id="filters">
+<button class="filter active" data-category="All">All</button>
+<button class="filter" data-category="Rice">Rice</button>
+<button class="filter" data-category="Soups & Swallow">Soups & Swallow</button>
+<button class="filter" data-category="Grills">Grills</button>
+<button class="filter" data-category="Seafood">Seafood</button>
+<button class="filter" data-category="Snacks & Drinks">Snacks & Drinks</button>
+</div>
+
+<div class="food-grid" id="foodGrid"></div>
+</div>
+</section>
+
+<section class="feature">
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1000&q=85" alt="Freshly prepared meal">
+<div class="feature-text">
+<div class="eyebrow">YOUR TABLE, YOUR WAY</div>
+<h2>Good food is <em>always a good idea.</em></h2>
+<p>Whether you're taking a break, sharing a meal or celebrating a little win, Wilson's Kitchen is here to make it delicious.</p>
+<a href="#menu" class="btn">ORDER YOUR FAVOURITE ↗</a>
+</div>
+</section>
+
+<section class="about" id="about">
+<div class="container about-content">
+<img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=85" alt="Delicious grilled food">
+<div>
+<div class="eyebrow">WELCOME TO OUR KITCHEN</div>
+<h2>Food that brings <em>people together.</em></h2>
+<p>At Wilson's Kitchen, we believe a great meal should be full of flavour and leave you looking forward to the next one.</p>
+<p>We're building a food experience around tasty favourites, thoughtful service and the joy of sharing good food.</p>
+<p>Based in Port Harcourt, we're ready to serve you through delivery or pickup.</p>
+</div>
+</div>
+</section>
+
+<section class="cta">
+<h2>Hungry already?</h2>
+<p>Your next great meal is just a few clicks away.</p>
+<br>
+<a href="#menu" class="btn">EXPLORE THE MENU ↗</a>
+</section>
+
+<section class="contact" id="contact">
+<div class="container">
+<div class="eyebrow">LET'S TALK FOOD</div>
+<h2>We're just a message away.</h2>
+<p>Questions, special requests or enquiries? We'd love to hear from you.</p>
+<div class="contact-details">
+<strong>Location:</strong> Port Harcourt, Rivers State<br>
+<strong>Services:</strong> Delivery & Customer Pickup<br>
+<strong>Business:</strong> Wilson's Kitchen
+</div>
+</div>
+</section>
+
+<footer>
+<h2 class="logo">Wilson's <span>Kitchen.</span></h2>
+<p>Good Food, Good Mood.</p>
+<p>© <span id="year"></span> Wilson's Kitchen. All Rights Reserved.</p>
+</footer>
+
+<div class="overlay" id="overlay" onclick="closeCart()"></div>
+
+<aside class="cart-panel" id="cartPanel">
+<div class="cart-header">
+<h2>Your Basket</h2>
+<button class="close" onclick="closeCart()">×</button>
+</div>
+<div class="cart-items" id="cartItems">
+<div class="empty">Your basket is waiting.<br>Add something delicious!</div>
+</div>
+<div class="cart-total">
+<h3><span>Subtotal</span><span id="total">₦0</span></h3>
+<p style="font-size:11px;color:#888;margin-bottom:12px">This is a menu and cart demo. No payment or order submission is connected.</p>
+<button class="btn" onclick="showOrderNotice()">Continue to Order</button>
+</div>
+</aside>
+
+<script>
+const menuItems = [
+{id:1,name:"Jollof Rice",category:"Rice",price:3500,description:"Smoky Nigerian party-style rice.",image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80"},
+{id:2,name:"Fried Rice",category:"Rice",price:4000,description:"Colourful and delicious fried rice.",image:"https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=700&q=80"},
+{id:3,name:"White Rice & Stew",category:"Rice",price:3000,description:"A comforting Nigerian classic.",image:"https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=80"},
+{id:4,name:"Egusi Soup",category:"Soups & Swallow",price:4500,description:"Rich and delicious traditional soup.",image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"},
+{id:5,name:"Oha Soup",category:"Soups & Swallow",price:4500,description:"A tasty Eastern Nigerian favourite.",image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"},
+{id:6,name:"Pounded Yam",category:"Soups & Swallow",price:1500,description:"Smooth swallow for your favourite soup.",image:"https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80"},
+{id:7,name:"Grilled Chicken",category:"Grills",price:5000,description:"Juicy and flavourful grilled chicken.",image:"https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=700&q=80"},
+{id:8,name:"Peppered Chicken",category:"Grills",price:5500,description:"Tender chicken with spicy pepper sauce.",image:"https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=700&q=80"},
+{id:9,name:"Peppered Fish",category:"Seafood",price:6000,description:"Well-seasoned fish with pepper sauce.",image:"https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=700&q=80"},
+{id:10,name:"Seafood Special",category:"Seafood",price:8500,description:"A satisfying seafood treat.",image:"https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=700&q=80"},
+{id:11,name:"Meat Pie",category:"Snacks & Drinks",price:1200,description:"Golden pastry with savoury filling.",image:"https://images.unsplash.com/photo-1608039829572-78524f79c4c7?auto=format&fit=crop&w=700&q=80"},
+{id:12,name:"Fruit Drink",category:"Snacks & Drinks",price:1800,description:"A refreshing drink for your meal.",image:"https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=700&q=80"}
+];
+
+let cart=[];
+let category="All";
+
+const money = value => "₦"+value.toLocaleString("en-NG");
+
+function displayMenu(){
+const grid=document.getElementById("foodGrid");
+
+const items=menuItems.filter(item=>
+category==="All" || item.category===category
+);
+
+grid.innerHTML=items.map(item=>`
+<div class="food-card">
+<img src="${item.image}" alt="${item.name}" loading="lazy">
+<div class="food-info">
+<h3>${item.name}</h3>
+<p>${item.description}</p>
+<div class="food-bottom">
+<span class="price">${money(item.price)}</span>
+<button class="add" onclick="addToCart(${item.id})">+</button>
+</div>
+</div>
+</div>
+`).join("");
+}
+
+document.getElementById("filters").addEventListener("click",e=>{
+const button=e.target.closest("[data-category]");
+if(!button)return;
+
+category=button.dataset.category;
+
+document.querySelectorAll(".filter").forEach(b=>{
+b.classList.toggle("active",b===button);
+});
+
+displayMenu();
+});
+
+function addToCart(id){
+const item=menuItems.find(x=>x.id===id);
+const existing=cart.find(x=>x.id===id);
+
+if(existing)existing.qty++;
+else cart.push({...item,qty:1});
+
+updateCart();
+}
+
+function changeQty(id,amount){
+const item=cart.find(x=>x.id===id);
+if(!item)return;
+
+item.qty+=amount;
+
+if(item.qty<=0){
+cart=cart.filter(x=>x.id!==id);
+}
+
+updateCart();
+}
+
+function updateCart(){
+const count=cart.reduce((sum,x)=>sum+x.qty,0);
+const total=cart.reduce((sum,x)=>sum+x.price*x.qty,0);
+
+document.getElementById("cartCount").textContent=count;
+document.getElementById("total").textContent=money(total);
+
+const items=document.getElementById("cartItems");
+
+if(cart.length===0){
+items.innerHTML='<div class="empty">Your basket is waiting.<br>Add something delicious!</div>';
+return;
+}
+
+items.innerHTML=cart.map(item=>`
+<div class="cart-item">
+<div>
+<h4>${item.name}</h4>
+<p>${money(item.price)} each</p>
+<div class="qty">
+<button onclick="changeQty(${item.id},-1)">−</button>
+<span>${item.qty}</span>
+<button onclick="changeQty(${item.id},1)">+</button>
+</div>
+</div>
+<strong>${money(item.price*item.qty)}</strong>
+</div>
+`).join("");
+}
+
+function openCart(){
+document.getElementById("cartPanel").classList.add("open");
+document.getElementById("overlay").classList.add("show");
+}
+
+function closeCart(){
+document.getElementById("cartPanel").classList.remove("open");
+document.getElementById("overlay").classList.remove("show");
+}
+
+function showOrderNotice(){
+alert("Thank you for choosing Wilson's Kitchen! Online ordering and payment will be available soon. Please contact the business directly to place an order.");
+}
+
+document.getElementById("menuToggle").addEventListener("click",()=>{
+document.getElementById("nav").classList.toggle("open");
+});
+
+document.querySelectorAll("#nav a").forEach(link=>{
+link.addEventListener("click",()=>{
+document.getElementById("nav").classList.remove("open");
+});
+});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+
+displayMenu();
+updateCart();
+</script>
+
+</body>
+  </html>
+  
